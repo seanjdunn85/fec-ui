@@ -3,7 +3,6 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {selectUser} from '../actions/index';
 import {selectCongressMember} from '../actions/index';
-
 import Graph from 'react-graph-vis';
 
 const options = {
@@ -28,11 +27,25 @@ const events = {
 class FECGraph extends Component{
 	
 	render(){
-		return (
-			<Graph graph={this.props.FEC} options={options} events={events}>
+		console.log(this.props.FEC)
+		try {
+			// statements
+			if(this.props.FEC.nodes.length){
+				return (
 
-			</Graph>
-			)
+					<Graph graph={this.props.FEC} options={options} events={events}>
+
+					</Graph>
+				)
+			}else{
+				return(
+					<div>loading...{this.props.FEC.nodes.length}</div>
+					)
+			}
+		} catch(e) {
+			// statements
+			console.log(e);
+		}
 	}
 
 }
@@ -40,7 +53,7 @@ class FECGraph extends Component{
 /*bind the fec graph state to properties*/
 function mapStateToProps(state){
 	return {
-		FEC:state.FEC
+		FEC:state.FEC,
 	}
 }
 

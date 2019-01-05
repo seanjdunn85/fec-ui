@@ -1,12 +1,13 @@
 import {combineReducers} from 'redux';
-import UserReducer from './reducer-users';
-import ActiveUserReducer from './reducer-active-user';
 import FECReducer from './reducer-fec';
+import CongressReducer from './reducer-congress';
+import CongressesReducer from './reducer-congresses';
 
 const allReducers = combineReducers({
-	users:UserReducer,
-	activeUser: ActiveUserReducer,
-	FEC:FECReducer
+	FEC:FECReducer,
+	congress:CongressReducer,
+	congresses:CongressesReducer
 })
 
 export default allReducers;
+

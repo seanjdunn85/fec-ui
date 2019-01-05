@@ -1,11 +1,27 @@
-import house from './house';
-import senate from './senate'
+import {REQUEST_CONGRESS, RECEIVE_CONGRESS} from '../actions';
 /*
- * The users reducer will always return an array of users no matter what
- * You need to return something, so if there are no users then just return an empty array
+ * State of the graph
  * */
 
-const sanitizeMember = (member, index) => {
+export default function(state = {nodes:[],edges:[]}, action){
+  console.log(action);
+  switch (action.type) {
+    case REQUEST_CONGRESS:
+      return Object.assign({}, state, {nodes:[], edges:[]});
+      break;
+    case RECEIVE_CONGRESS:
+      console.log('RECEIVE_CONGRESS in FEC reducer')
+      return Object.assign({}, state, {nodes:action.congress.congressMembers.map(formatCongressMemberForGraph)});
+      break;
+    default:
+      return state;
+      break;
+  }
+  return state;
+}
+
+
+const formatCongressMemberForGraph = (member, index) => {
   var fi = member.id.substring(0,1);
   member.image = `http://bioguide.congress.gov/bioguide/photo/${fi}/${member.id}.jpg`
   member.shape ="circularImage"
@@ -13,22 +29,4 @@ const sanitizeMember = (member, index) => {
   member.size = 30;
   member.color = (member.party == 'R' ? 'red' : 'blue');
   return member;
-}
-
-const houseMembers = house.results[0].members.map(sanitizeMember);
-const senateMembers = senate.results[0].members.map(sanitizeMember);
-const congressMembers = senateMembers.concat(houseMembers)
-const graph = {
-  nodes:congressMembers,
-  edges: [
-      {from: 1, to: 2},
-      {from: 1, to: 3},
-      {from: 2, to: 4},
-      {from: 2, to: 5}
-    ]
-};
-
-
-export default function () {
-    return graph
 }
