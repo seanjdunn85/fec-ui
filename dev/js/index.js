@@ -23,4 +23,4 @@ ReactDOM.render(
     document.getElementById('root')
 );
 /*Currently only calling 115 because duplicate id's throw errors in the graph, ProPublica opted to include duplicates*/
-store.dispatch(fetchCongress(115))
+store.dispatch(fetchCongress(116))

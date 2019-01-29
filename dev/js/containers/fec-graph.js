@@ -5,7 +5,7 @@ import {selectUser} from '../actions/index';
 import {selectCongressMember} from '../actions/index';
 import Graph from 'react-graph-vis';
 
-const options = {
+const fecGraphOptions = {
 	    layout: {
 	        hierarchical: false
 	    },
@@ -33,7 +33,7 @@ class FECGraph extends Component{
 			if(this.props.FEC.nodes.length){
 				return (
 
-					<Graph graph={this.props.FEC} options={options} events={events}>
+					<Graph graph={this.props.FEC} options={fecGraphOptions} events={events}>
 
 					</Graph>
 				)

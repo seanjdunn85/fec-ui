@@ -38,6 +38,18 @@ export const selectCongressMember = (member) => {
 	}
 }
 
+
+export function fetchCongressMemberContributions  ( member_id ) {
+
+	const personName = 'Alice';
+	const resultPromise = session.run(
+	  'CREATE (a:Person {name: $name}) RETURN a',
+	  {name: personName}
+	);
+
+}
+
+
 export function fetchCongress(congressNumber){
 		//the dispatch method is passed into to the function we create, so we cad dispatch states from the API call 
 		
@@ -62,8 +74,21 @@ export function fetchCongress(congressNumber){
 				)
 				
 				.then(
-					json => dispatch(receiveCongress({congressMembers:json,congressNumber:congressNumber}))
-					)
+					json => {
+						var memberIds = [];
+						/*check for duplicate entries*/
+						const members = json.filter((member) => {
+							
+							if(memberIds.indexOf(member.id) == -1){
+								return false;
+							}
+							memberIds.append(member.id)
+							console.log(val); 
+							return true;
+
+						})
+						dispatch(receiveCongress({congressMembers:json,congressNumber:congressNumber}))
+					})
 		}
 }
 

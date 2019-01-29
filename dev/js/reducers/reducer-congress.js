@@ -7,6 +7,9 @@ import {
   RECEIVE_CONGRESS
 } from '../actions'
 
+
+// const removeDuplicateCongressMembers
+
 function congress(state={
     isFetching:false,
     didInvalidate:false,
@@ -21,7 +24,7 @@ function congress(state={
       })
       break;
     case RECEIVE_CONGRESS:
-      console.log('action',action)
+      console.log('action',action);
       return Object.assign({}, state, {
         isFetching:false,
         didInvalidate:false,
